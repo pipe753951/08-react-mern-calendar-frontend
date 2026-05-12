@@ -1,0 +1,33 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+
+import type { AuthStatus } from "../types/AuthStatus.types";
+
+import CalendarPage from "../calendar/pages/calendar/CalendarPage";
+import LoginPage from "../auth/pages/login/LoginPage";
+import RegisterPage from "../auth/pages/register/RegisterPage";
+
+const AppRouter = function () {
+  const authStatus: AuthStatus = "authenticated" as AuthStatus;
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        {authStatus === "authenticated" && (
+          <>
+            <Route path="/" element={<CalendarPage />} />
+            <Route path="/*" element={<Navigate to="s/" />} />
+          </>
+        )}
+        {authStatus === "not-authenticated" && (
+          <>
+            <Route path="/auth/login" element={<LoginPage />} />
+            <Route path="/auth/register" element={<RegisterPage />} />
+            <Route path="/*" element={<Navigate to="/auth/login" />} />
+          </>
+        )}
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default AppRouter;
