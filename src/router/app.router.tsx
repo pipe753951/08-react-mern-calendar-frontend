@@ -3,20 +3,23 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import type { AuthStatus } from "../types/AuthStatus.types";
 
 import AuthLayout from "../auth/layouts/AuthLayout";
+import CalendarLayout from "../calendar/layouts/CalendarLayout";
 
 import CalendarPage from "../calendar/pages/calendar/CalendarPage";
 import LoginPage from "../auth/pages/login/LoginPage";
 import RegisterPage from "../auth/pages/register/RegisterPage";
 
 const AppRouter = function () {
-  const authStatus: AuthStatus = "not-authenticated" as AuthStatus;
+  const authStatus: AuthStatus = "authenticated" as AuthStatus;
 
   return (
     <BrowserRouter>
       <Routes>
         {authStatus === "authenticated" && (
           <>
-            <Route path="/" element={<CalendarPage />} />
+            <Route path="/" element={<CalendarLayout />}>
+              <Route index element={<CalendarPage />} />
+            </Route>
             <Route path="/*" element={<Navigate to="/" />} />
           </>
         )}
