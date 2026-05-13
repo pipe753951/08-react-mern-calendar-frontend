@@ -55,20 +55,24 @@ const CalendarPage = function () {
     <>
       <Calendar
         className="h-100 p-4"
+        //* Language
         culture="es"
         localizer={calendarLocalizer}
         messages={getCalendarMessagesLocale("es")}
-        startAccessor="start"
-        endAccessor="end"
+        //* State
         date={currentDate}
         view={currentView}
-        onNavigate={setCurrentDate}
-        onView={setCurrentView}
+        //* Calendar events & UI.
         events={events}
-        eventPropGetter={eventStyleGetter}
         components={{
           event: CalendarEventBox,
         }}
+        //* Events
+        // Events to handle state.
+        onNavigate={setCurrentDate}
+        onView={setCurrentView}
+        // Events to customize UI.
+        eventPropGetter={eventStyleGetter}
       />
     </>
   );
