@@ -1,5 +1,5 @@
 const CalendarPage = function () {
-  return <div>CalendarPage</div>;
+  return <></>;
 };
 
 export default CalendarPage;
