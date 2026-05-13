@@ -1,0 +1,22 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.auth-card {
+  width: 25rem;
+  padding: 1rem;
+
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1rem;
+
+  box-shadow: 0 1rem 3rem var(--bs-tertiary-bg);
+}
+
+.auth-actions {
+  margin-top: 1rem;
+}
