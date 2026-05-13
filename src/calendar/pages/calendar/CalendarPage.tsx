@@ -3,28 +3,25 @@ import { useState, type CSSProperties } from "react";
 import {
   Calendar,
   Views,
-  type Event as CalendarEvent,
   type EventPropGetter as CalendarEventPropGetter,
 } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { addHours } from "date-fns";
 
+import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent";
+
 import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
 
-interface AppEvent extends CalendarEvent {
-  notes: string;
-  bgColor: string;
-}
-
-const events: AppEvent[] = [
+const events: CalendarEvent[] = [
   {
     title: "Cumpleaños del lider",
     notes: "Se realizará una celebración en grupo.",
     start: new Date(),
     end: addHours(new Date(), 2),
     bgColor: "#FAFAFA",
+    user: { id: "123", name: "Usuario" },
   },
 ];
 
@@ -34,7 +31,7 @@ const CalendarPage = function () {
     (typeof Views)[keyof typeof Views]
   >(Views.MONTH);
 
-  const eventStyleGetter: CalendarEventPropGetter<AppEvent> = (
+  const eventStyleGetter: CalendarEventPropGetter<CalendarEvent> = (
     event,
     start,
     end,
