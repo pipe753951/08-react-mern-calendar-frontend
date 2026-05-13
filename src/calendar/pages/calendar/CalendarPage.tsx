@@ -14,6 +14,8 @@ import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent";
 import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
 
+import CalendarEventBox from "../../components/calendar/CalendarEventBox";
+
 const events: CalendarEvent[] = [
   {
     title: "Cumpleaños del lider",
@@ -64,6 +66,9 @@ const CalendarPage = function () {
         onView={setCurrentView}
         events={events}
         eventPropGetter={eventStyleGetter}
+        components={{
+          event: CalendarEventBox,
+        }}
       />
     </>
   );
