@@ -1,22 +1,19 @@
-import { Calendar, dateFnsLocalizer, DateLocalizer } from "react-big-calendar";
+import type { CSSProperties } from "react";
+
+import { Calendar, type Event, type EventPropGetter } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import { addHours, format, getDay, parse, startOfWeek } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 
-const locales = {
-  "en-US": enUS,
-};
+import { addHours } from "date-fns";
+import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
 
-const localizer: DateLocalizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek,
-  getDay,
-  locales,
-});
+interface AppEvent extends Event {
+  notes: string;
+  bgColor: string;
+}
 
-const events = [
+const events: AppEvent[] = [
   {
     title: "Cumpleaños del lider",
     notes: "Se realizará una celebración en grupo.",
@@ -27,14 +24,35 @@ const events = [
 ];
 
 const CalendarPage = function () {
+  const eventStyleGetter: EventPropGetter<AppEvent> = (
+    event,
+    start,
+    end,
+    isSelected,
+  ) => {
+    console.debug({ event, start, end, isSelected });
+
+    const style: CSSProperties = {
+      backgroundColor: "#347CF7",
+      color: "white",
+      borderRadius: "none",
+      opacity: 0.8,
+    };
+
+    return { style };
+  };
+
   return (
     <>
       <Calendar
-        localizer={localizer}
+        culture="es"
+        localizer={calendarLocalizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
         className="h-100 p-4"
+        messages={getCalendarMessagesLocale("es")}
+        eventPropGetter={eventStyleGetter}
       />
     </>
   );
