@@ -1,14 +1,19 @@
-import type { CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 
-import { Calendar, type Event, type EventPropGetter } from "react-big-calendar";
+import {
+  Calendar,
+  Views,
+  type Event as CalendarEvent,
+  type EventPropGetter as CalendarEventPropGetter,
+} from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
-
 import { addHours } from "date-fns";
+
+import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
 
-interface AppEvent extends Event {
+interface AppEvent extends CalendarEvent {
   notes: string;
   bgColor: string;
 }
@@ -24,7 +29,12 @@ const events: AppEvent[] = [
 ];
 
 const CalendarPage = function () {
-  const eventStyleGetter: EventPropGetter<AppEvent> = (
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const [currentView, setCurrentView] = useState<
+    (typeof Views)[keyof typeof Views]
+  >(Views.MONTH);
+
+  const eventStyleGetter: CalendarEventPropGetter<AppEvent> = (
     event,
     start,
     end,
@@ -45,13 +55,17 @@ const CalendarPage = function () {
   return (
     <>
       <Calendar
+        className="h-100 p-4"
         culture="es"
         localizer={calendarLocalizer}
-        events={events}
+        messages={getCalendarMessagesLocale("es")}
         startAccessor="start"
         endAccessor="end"
-        className="h-100 p-4"
-        messages={getCalendarMessagesLocale("es")}
+        date={currentDate}
+        view={currentView}
+        onNavigate={setCurrentDate}
+        onView={setCurrentView}
+        events={events}
         eventPropGetter={eventStyleGetter}
       />
     </>
