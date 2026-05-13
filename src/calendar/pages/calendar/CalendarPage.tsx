@@ -2,10 +2,9 @@ import { useState, type CSSProperties } from "react";
 
 import {
   Calendar,
-  Views,
   type EventPropGetter as CalendarEventPropGetter,
+  type View as CalendarView,
 } from "react-big-calendar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { addHours } from "date-fns";
 
@@ -15,6 +14,9 @@ import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
 
 import CalendarEventBox from "../../components/calendar/CalendarEventBox";
+
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import useValidatedCalendarView from "../../hooks/useValidatedCalendarView";
 
 const events: CalendarEvent[] = [
   {
@@ -29,18 +31,21 @@ const events: CalendarEvent[] = [
 
 const CalendarPage = function () {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
-  const [currentView, setCurrentView] = useState<
-    (typeof Views)[keyof typeof Views]
-  >(Views.MONTH);
 
-  const eventStyleGetter: CalendarEventPropGetter<CalendarEvent> = (
-    event,
-    start,
-    end,
-    isSelected,
-  ) => {
-    console.debug({ event, start, end, isSelected });
+  const { calendarView, setCalendarView } = useValidatedCalendarView();
 
+  // const [currentView, setCurrentView] = useState<CalendarView>(
+  //   (view as CalendarView) || "week",
+  // );
+
+  // const eventStyleGetter: CalendarEventPropGetter<CalendarEvent> = (
+  //   event,
+  //   start,
+  //   end,
+  //   isSelected,
+  // ) => {/* ... */}
+
+  const eventStyleGetter: CalendarEventPropGetter<CalendarEvent> = () => {
     const style: CSSProperties = {
       backgroundColor: "#347CF7",
       color: "white",
@@ -49,6 +54,20 @@ const CalendarPage = function () {
     };
 
     return { style };
+  };
+
+  const handleCalendarEventDoubleClick = (event: CalendarEvent) => {
+    console.log({ doubleClickEvent: event });
+  };
+
+  const handleCalendarEventSelect = (event: CalendarEvent) => {
+    console.log({ selectEvent: event });
+  };
+
+  const handleCalendarViewChange = (view: CalendarView) => {
+    console.log({ view });
+
+    setCalendarView(view);
   };
 
   return (
@@ -61,16 +80,18 @@ const CalendarPage = function () {
         messages={getCalendarMessagesLocale("es")}
         //* State
         date={currentDate}
-        view={currentView}
+        view={calendarView}
         //* Calendar events & UI.
         events={events}
         components={{
           event: CalendarEventBox,
         }}
         //* Events
+        onDoubleClickEvent={handleCalendarEventDoubleClick}
+        onSelectEvent={handleCalendarEventSelect}
+        onView={handleCalendarViewChange}
         // Events to handle state.
         onNavigate={setCurrentDate}
-        onView={setCurrentView}
         // Events to customize UI.
         eventPropGetter={eventStyleGetter}
       />

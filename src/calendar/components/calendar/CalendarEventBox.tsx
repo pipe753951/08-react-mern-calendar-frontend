@@ -5,7 +5,6 @@ interface CalendarEventBoxProps {
 }
 
 const CalendarEventBox = function ({ event }: CalendarEventBoxProps) {
-  console.log({ event });
   return (
     <>
       <strong>{event.title}</strong>
