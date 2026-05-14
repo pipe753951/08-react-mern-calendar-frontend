@@ -1,15 +1,15 @@
-import { useState, type ChangeEvent, type PropsWithChildren } from "react";
+import { useState, type ChangeEvent } from "react";
 
 import Modal from "react-modal";
 
 import { SaveIcon } from "lucide-react";
 
 import { addHours, compareAsc } from "date-fns";
-import DatePicker from "react-datepicker";
 
 import AppModal from "../../../shared/components/AppModal";
 
 import "react-datepicker/dist/react-datepicker.css";
+import CalendarFormDatetime from "../form/CalendarFormDatetime";
 
 Modal.setAppElement("#root");
 
@@ -77,20 +77,16 @@ const CalendarModal = function () {
       <form>
         <div className="form-group mb-2">
           <label>Fecha y hora inicio</label>
-          <DatePicker
-            className="form-control"
-            wrapperClassName="w-100"
-            selected={formValues.start}
+          <CalendarFormDatetime
+            date={formValues.start}
             onChange={handleCalendarStartDateSelect}
           />
         </div>
         <div className="form-group mb-2">
           <label>Fecha y hora fin</label>
-          <DatePicker
-            className="form-control"
-            wrapperClassName="w-100"
+          <CalendarFormDatetime
+            date={formValues.end}
             minDate={formValues.start}
-            selected={formValues.end}
             onChange={handleCalendarEndDateSelect}
           />
         </div>
