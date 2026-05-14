@@ -1,10 +1,10 @@
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type PropsWithChildren } from "react";
 
 import Modal from "react-modal";
 
 import { SaveIcon } from "lucide-react";
 
-import { addHours } from "date-fns";
+import { addHours, compareAsc } from "date-fns";
 import DatePicker from "react-datepicker";
 
 import AppModal from "../../../shared/components/AppModal";
@@ -12,8 +12,6 @@ import AppModal from "../../../shared/components/AppModal";
 import "react-datepicker/dist/react-datepicker.css";
 
 Modal.setAppElement("#root");
-
-type CalendarModalFormDates = "start" | "end";
 
 interface CalendarModalFormValues {
   eventTitle: string;
@@ -48,21 +46,34 @@ const CalendarModal = function () {
     }));
   };
 
-  const handleCalendarDateChange = (
-    date: Date | null,
-    name: CalendarModalFormDates,
-  ) => {
+  const handleCalendarStartDateSelect = (date: Date | null) => {
     if (!date) return;
+
     setFormValues(
       (prevFormValues): CalendarModalFormValues => ({
         ...prevFormValues,
-        [name]: date,
+        start: date,
+        end:
+          compareAsc(date, prevFormValues.end) === 1
+            ? date
+            : prevFormValues.end,
+      }),
+    );
+  };
+
+  const handleCalendarEndDateSelect = (date: Date | null) => {
+    if (!date) return;
+
+    setFormValues(
+      (prevFormValues): CalendarModalFormValues => ({
+        ...prevFormValues,
+        end: date,
       }),
     );
   };
 
   return (
-    <AppModal title="Nuevo Evento">
+    <AppModal title="Nuevo evento">
       <form>
         <div className="form-group mb-2">
           <label>Fecha y hora inicio</label>
@@ -70,24 +81,19 @@ const CalendarModal = function () {
             className="form-control"
             wrapperClassName="w-100"
             selected={formValues.start}
-            onChange={(date: Date | null) =>
-              handleCalendarDateChange(date, "start")
-            }
+            onChange={handleCalendarStartDateSelect}
           />
         </div>
-
         <div className="form-group mb-2">
           <label>Fecha y hora fin</label>
           <DatePicker
             className="form-control"
             wrapperClassName="w-100"
+            minDate={formValues.start}
             selected={formValues.end}
-            onChange={(date: Date | null) =>
-              handleCalendarDateChange(date, "end")
-            }
+            onChange={handleCalendarEndDateSelect}
           />
         </div>
-
         <div className="form-group mb-2">
           <label>Titulo y notas</label>
           <input
@@ -103,7 +109,6 @@ const CalendarModal = function () {
             Una descripción corta
           </small>
         </div>
-
         <div className="form-group mb-2">
           <textarea
             className="form-control"
@@ -117,7 +122,6 @@ const CalendarModal = function () {
             Información adicional
           </small>
         </div>
-
         <button type="submit" className="btn btn-outline-primary btn-block">
           <SaveIcon />
           <span>&nbsp;Guardar</span>
