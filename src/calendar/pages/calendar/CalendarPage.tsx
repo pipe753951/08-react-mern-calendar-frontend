@@ -13,10 +13,12 @@ import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent";
 import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
 
+import useValidatedCalendarView from "../../hooks/useValidatedCalendarView";
+
 import CalendarEventBox from "../../components/calendar/CalendarEventBox";
+import CalendarModal from "../../components/calendar/CalendarModal";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import useValidatedCalendarView from "../../hooks/useValidatedCalendarView";
 
 const events: CalendarEvent[] = [
   {
@@ -95,6 +97,7 @@ const CalendarPage = function () {
         // Events to customize UI.
         eventPropGetter={eventStyleGetter}
       />
+      <CalendarModal />
     </>
   );
 };
