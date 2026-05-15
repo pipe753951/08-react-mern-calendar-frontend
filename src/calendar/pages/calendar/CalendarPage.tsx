@@ -16,7 +16,7 @@ import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale
 import useValidatedCalendarView from "../../hooks/useValidatedCalendarView";
 
 import CalendarEventBox from "../../components/calendar/CalendarEventBox";
-import CalendarModal from "../../components/calendar/CalendarModal";
+import CalendarEventModal from "../../components/calendar/CalendarEventModal";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -97,7 +97,7 @@ const CalendarPage = function () {
         // Events to customize UI.
         eventPropGetter={eventStyleGetter}
       />
-      <CalendarModal />
+      <CalendarEventModal />
     </>
   );
 };

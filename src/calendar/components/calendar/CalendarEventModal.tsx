@@ -21,7 +21,7 @@ interface CalendarModalFormValues {
   end: Date;
 }
 
-const CalendarModal = function () {
+const CalendarEventModal = function () {
   const [formValues, setFormValues] = useState<CalendarModalFormValues>({
     eventTitle: "Usuario",
     note: "Esta es mi nota",
@@ -156,4 +156,4 @@ const CalendarModal = function () {
   );
 };
 
-export default CalendarModal;
+export default CalendarEventModal;
