@@ -6,6 +6,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 interface CalendarFormDateProps {
   date: Date;
   minDate?: Date;
+  name: string;
   onChange(
     date: Date | null,
     event?: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
@@ -14,11 +15,8 @@ interface CalendarFormDateProps {
 
 registerLocale("es", es);
 
-const CalendarFormDatetime = function ({
-  date,
-  minDate,
-  onChange,
-}: CalendarFormDateProps) {
+const CalendarFormDatetime = function (props: CalendarFormDateProps) {
+  const { date, minDate, name, onChange } = props;
   return (
     <DatePicker
       // Styles
@@ -31,6 +29,7 @@ const CalendarFormDatetime = function ({
       dateFormat="Pp"
       // Values
       minDate={minDate}
+      name={name}
       selected={date}
       onChange={onChange}
     />

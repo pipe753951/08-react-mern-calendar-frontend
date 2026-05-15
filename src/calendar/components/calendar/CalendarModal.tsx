@@ -1,15 +1,16 @@
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type SubmitEvent } from "react";
 
 import Modal from "react-modal";
 
 import { SaveIcon } from "lucide-react";
 
-import { addHours, compareAsc } from "date-fns";
+import { addHours, compareAsc, differenceInSeconds } from "date-fns";
 
 import AppModal from "../../../shared/components/AppModal";
+import CalendarFormDatetime from "../form/CalendarFormDatetime";
 
 import "react-datepicker/dist/react-datepicker.css";
-import CalendarFormDatetime from "../form/CalendarFormDatetime";
+import { toast } from "sonner";
 
 Modal.setAppElement("#root");
 
@@ -72,26 +73,53 @@ const CalendarModal = function () {
     );
   };
 
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const difference = differenceInSeconds(formValues.end, formValues.start);
+
+    if (isNaN(difference)) {
+      toast.error("Las fechas no son válidas, verifica su formato.");
+      return;
+    }
+
+    if (difference < 0) {
+      toast.error(
+        "La fecha límite debe ser superior o igual que la fecha de inicio.",
+      );
+      return;
+    }
+
+    if (!formValues.eventTitle) {
+      toast.error("El nuevo evento debe tener un título");
+      return;
+    }
+
+    console.debug({ event });
+  };
+
   return (
     <AppModal title="Nuevo evento">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-group mb-2">
-          <label>Fecha y hora inicio</label>
+          <label htmlFor="start">Fecha y hora inicio</label>
           <CalendarFormDatetime
+            name="start"
             date={formValues.start}
             onChange={handleCalendarStartDateSelect}
           />
         </div>
         <div className="form-group mb-2">
-          <label>Fecha y hora fin</label>
+          <label htmlFor="end">Fecha y hora fin</label>
           <CalendarFormDatetime
+            name="end"
             date={formValues.end}
             minDate={formValues.start}
             onChange={handleCalendarEndDateSelect}
           />
         </div>
         <div className="form-group mb-2">
-          <label>Titulo y notas</label>
+          <label htmlFor="title">Título</label>
           <input
             type="text"
             className="form-control"
@@ -106,6 +134,7 @@ const CalendarModal = function () {
           </small>
         </div>
         <div className="form-group mb-2">
+          <label htmlFor="notes">Notas</label>
           <textarea
             className="form-control"
             placeholder="Notas"
