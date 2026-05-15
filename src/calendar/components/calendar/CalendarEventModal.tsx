@@ -1,16 +1,16 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 
-import Modal from "react-modal";
+import { addHours, compareAsc, differenceInSeconds } from "date-fns";
 
 import { SaveIcon } from "lucide-react";
 
-import { addHours, compareAsc, differenceInSeconds } from "date-fns";
+import Modal from "react-modal";
+import { toast } from "sonner";
 
 import AppModal from "../../../shared/components/AppModal";
 import CalendarFormDatetime from "../form/CalendarFormDatetime";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { toast } from "sonner";
 
 Modal.setAppElement("#root");
 
