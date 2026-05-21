@@ -1,4 +1,4 @@
-import { useState, type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
 import Modal from "react-modal";
 
@@ -6,16 +6,16 @@ import "../styles/AppModal.css";
 
 interface AppModalProps extends PropsWithChildren {
   title: string;
+  isOpen: boolean;
+  onClose?(): void;
 }
 
 Modal.setAppElement("#root");
 
-const AppModal = function ({ title, children }: AppModalProps) {
-  const [isOpen, setIsOpen] = useState(true);
+const AppModal = function (props: AppModalProps) {
+  const { title, isOpen, onClose, children } = props;
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
+  const handleCloseModal = onClose;
 
   return (
     <Modal

@@ -7,6 +7,8 @@ import { SaveIcon } from "lucide-react";
 import Modal from "react-modal";
 import { toast } from "sonner";
 
+import useUiStore from "../../../hooks/useUiStore";
+
 import AppModal from "../../../shared/components/AppModal";
 import CalendarFormDatetime from "../form/CalendarFormDatetime";
 
@@ -22,6 +24,8 @@ interface CalendarModalFormValues {
 }
 
 const CalendarEventModal = function () {
+  const { closeDateModal } = useUiStore();
+
   const [formValues, setFormValues] = useState<CalendarModalFormValues>({
     eventTitle: "Usuario",
     note: "Esta es mi nota",
@@ -30,6 +34,8 @@ const CalendarEventModal = function () {
   });
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+  const { isDateModalOpen } = useUiStore();
 
   const additionalTitleClass = useMemo<string>(() => {
     if (!isFormSubmitted) return "";
@@ -108,7 +114,11 @@ const CalendarEventModal = function () {
   };
 
   return (
-    <AppModal title="Nuevo evento">
+    <AppModal
+      title="Nuevo evento"
+      isOpen={isDateModalOpen}
+      onClose={closeDateModal}
+    >
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2">
           <label htmlFor="start">Fecha y hora inicio</label>

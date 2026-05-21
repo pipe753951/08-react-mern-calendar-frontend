@@ -13,6 +13,7 @@ import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent";
 import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
 
+import useUiStore from "../../../hooks/useUiStore";
 import useValidatedCalendarView from "../../hooks/useValidatedCalendarView";
 
 import CalendarEventBox from "../../components/calendar/CalendarEventBox";
@@ -32,7 +33,8 @@ const events: CalendarEvent[] = [
 ];
 
 const CalendarPage = function () {
-  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const { openDateModal } = useUiStore();
+  const [selectedDate, setCurrentDate] = useState<Date>(new Date());
 
   const { calendarView, setCalendarView } = useValidatedCalendarView();
 
@@ -60,6 +62,7 @@ const CalendarPage = function () {
 
   const handleCalendarEventDoubleClick = (event: CalendarEvent) => {
     console.log({ doubleClickEvent: event });
+    openDateModal();
   };
 
   const handleCalendarEventSelect = (event: CalendarEvent) => {
@@ -81,7 +84,7 @@ const CalendarPage = function () {
         localizer={calendarLocalizer}
         messages={getCalendarMessagesLocale("es")}
         //* State
-        date={currentDate}
+        date={selectedDate}
         view={calendarView}
         //* Calendar events & UI.
         events={events}
