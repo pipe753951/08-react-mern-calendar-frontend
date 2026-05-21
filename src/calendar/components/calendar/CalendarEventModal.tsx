@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type SubmitEvent } from "react";
+import { useMemo, useState, type ChangeEvent, type SubmitEvent } from "react";
 
 import { addHours, compareAsc, differenceInSeconds } from "date-fns";
 
@@ -28,6 +28,14 @@ const CalendarEventModal = function () {
     start: new Date(),
     end: addHours(new Date(), 2),
   });
+
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+  const additionalTitleClass = useMemo<string>(() => {
+    if (!isFormSubmitted) return "";
+
+    return formValues.eventTitle ? "is-valid" : "is-invalid";
+  }, [formValues.eventTitle, isFormSubmitted]);
 
   const handleCalendarTitleChange = (
     event: ChangeEvent<HTMLInputElement, HTMLInputElement>,
@@ -75,6 +83,7 @@ const CalendarEventModal = function () {
 
   const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsFormSubmitted(true);
 
     const difference = differenceInSeconds(formValues.end, formValues.start);
 
@@ -122,7 +131,7 @@ const CalendarEventModal = function () {
           <label htmlFor="title">Título</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${additionalTitleClass}`}
             placeholder="Título del evento"
             name="title"
             autoComplete="off"
