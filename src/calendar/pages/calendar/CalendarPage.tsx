@@ -6,13 +6,12 @@ import {
   type View as CalendarView,
 } from "react-big-calendar";
 
-import { addHours } from "date-fns";
-
 import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent";
 
 import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
 
+import useCalendarStore from "../../../hooks/useCalendarStore";
 import useUiStore from "../../../hooks/useUiStore";
 import useValidatedCalendarView from "../../hooks/useValidatedCalendarView";
 
@@ -21,19 +20,10 @@ import CalendarEventModal from "../../components/calendar/CalendarEventModal";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-const events: CalendarEvent[] = [
-  {
-    title: "Cumpleaños del lider",
-    notes: "Se realizará una celebración en grupo.",
-    start: new Date(),
-    end: addHours(new Date(), 2),
-    bgColor: "#FAFAFA",
-    user: { id: "123", name: "Usuario" },
-  },
-];
-
 const CalendarPage = function () {
   const { openDateModal } = useUiStore();
+  const { calendarEvents } = useCalendarStore();
+
   const [selectedDate, setCurrentDate] = useState<Date>(new Date());
 
   const { calendarView, setCalendarView } = useValidatedCalendarView();
@@ -87,7 +77,7 @@ const CalendarPage = function () {
         date={selectedDate}
         view={calendarView}
         //* Calendar events & UI.
-        events={events}
+        events={calendarEvents}
         components={{
           event: CalendarEventBox,
         }}
