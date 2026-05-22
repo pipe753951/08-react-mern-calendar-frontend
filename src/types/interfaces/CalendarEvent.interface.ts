@@ -1,9 +1,12 @@
-import type { Event as ReactCalendarEvent } from "react-big-calendar";
-
 import type { User } from "./User.interface";
 
-export interface CalendarEvent extends ReactCalendarEvent {
+export interface CalendarEvent {
+  id: string;
+
   bgColor: string;
-  notes: string;
+  endDateTimestamp: number;
+  note: string;
+  startDateTimestamp: number;
+  title: string;
   user: User;
 }

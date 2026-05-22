@@ -1,14 +1,16 @@
-import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent.interface";
+import type { CustomBigCalendarEvent } from "../../../types/interfaces/CustomBigCalendarEvent.interface";
 
 interface CalendarEventBoxProps {
-  event: CalendarEvent;
+  event: CustomBigCalendarEvent;
 }
 
-const CalendarEventBox = function ({ event }: CalendarEventBoxProps) {
+const CalendarEventBox = function ({
+  event: calendarEvent,
+}: CalendarEventBoxProps) {
   return (
     <>
-      <strong>{event.title}</strong>
-      <span>&nbsp;- {event.user.name}</span>
+      <strong>{calendarEvent.title}</strong>
+      <span>&nbsp;- {calendarEvent.originalCalendarEvent.user.name}</span>
     </>
   );
 };

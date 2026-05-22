@@ -6,7 +6,7 @@ import {
   type View as CalendarView,
 } from "react-big-calendar";
 
-import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent.interface";
+import type { CustomBigCalendarEvent } from "../../../types/interfaces/CustomBigCalendarEvent.interface";
 
 import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
@@ -19,6 +19,7 @@ import CalendarEventBox from "../../components/calendar/CalendarEventBox";
 import CalendarEventModal from "../../components/calendar/CalendarEventModal";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { mapCustomBigCalendarEvents } from "../../mappers/customBigCalendarEvent.mapper";
 
 const CalendarPage = function () {
   const { openDateModal } = useUiStore();
@@ -27,6 +28,9 @@ const CalendarPage = function () {
   const [selectedDate, setCurrentDate] = useState<Date>(new Date());
 
   const { calendarView, setCalendarView } = useValidatedCalendarView();
+
+  const mappedCustomBigCalendarEvents =
+    mapCustomBigCalendarEvents(calendarEvents);
 
   // const [currentView, setCurrentView] = useState<CalendarView>(
   //   (view as CalendarView) || "week",
@@ -39,7 +43,9 @@ const CalendarPage = function () {
   //   isSelected,
   // ) => {/* ... */}
 
-  const eventStyleGetter: CalendarEventPropGetter<CalendarEvent> = () => {
+  const eventStyleGetter: CalendarEventPropGetter<
+    CustomBigCalendarEvent
+  > = () => {
     const style: CSSProperties = {
       backgroundColor: "#347CF7",
       color: "white",
@@ -50,12 +56,12 @@ const CalendarPage = function () {
     return { style };
   };
 
-  const handleCalendarEventDoubleClick = (event: CalendarEvent) => {
+  const handleCalendarEventDoubleClick = (event: CustomBigCalendarEvent) => {
     console.log({ doubleClickEvent: event });
     openDateModal();
   };
 
-  const handleCalendarEventSelect = (event: CalendarEvent) => {
+  const handleCalendarEventSelect = (event: CustomBigCalendarEvent) => {
     console.log({ selectEvent: event });
   };
 
@@ -77,7 +83,7 @@ const CalendarPage = function () {
         date={selectedDate}
         view={calendarView}
         //* Calendar events & UI.
-        events={calendarEvents}
+        events={mappedCustomBigCalendarEvents}
         components={{
           event: CalendarEventBox,
         }}

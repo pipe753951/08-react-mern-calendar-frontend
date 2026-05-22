@@ -5,10 +5,11 @@ import { addHours } from "date-fns";
 import type { CalendarEvent } from "../../types/interfaces/CalendarEvent.interface";
 
 const tempEvent: CalendarEvent = {
+  id: Date.now().toString(),
   title: "Cumpleaños del lider",
-  notes: "Se realizará una celebración en grupo.",
-  start: new Date(),
-  end: addHours(new Date(), 2),
+  note: "Se realizará una celebración en grupo.",
+  startDateTimestamp: Date.now(),
+  endDateTimestamp: addHours(new Date(), 2).getTime(),
   bgColor: "#FAFAFA",
   user: { id: "123", name: "Usuario" },
 };
