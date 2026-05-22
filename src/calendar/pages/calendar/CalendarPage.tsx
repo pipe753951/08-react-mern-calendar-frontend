@@ -6,7 +6,7 @@ import {
   type View as CalendarView,
 } from "react-big-calendar";
 
-import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent";
+import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent.interface";
 
 import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";

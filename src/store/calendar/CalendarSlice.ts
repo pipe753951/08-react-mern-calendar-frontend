@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit/react";
 
 import { addHours } from "date-fns";
 
-import type { CalendarEvent } from "../../types/interfaces/CalendarEvent";
+import type { CalendarEvent } from "../../types/interfaces/CalendarEvent.interface";
 
 const tempEvent: CalendarEvent = {
   title: "Cumpleaños del lider",

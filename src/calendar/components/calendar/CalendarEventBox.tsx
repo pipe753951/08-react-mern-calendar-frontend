@@ -1,4 +1,4 @@
-import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent";
+import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent.interface";
 
 interface CalendarEventBoxProps {
   event: CalendarEvent;

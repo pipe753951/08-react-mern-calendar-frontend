@@ -1,6 +1,6 @@
 import type { Event as ReactCalendarEvent } from "react-big-calendar";
 
-import type { User } from "./User";
+import type { User } from "./User.interface";
 
 export interface CalendarEvent extends ReactCalendarEvent {
   bgColor: string;
