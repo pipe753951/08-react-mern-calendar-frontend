@@ -16,7 +16,16 @@ const useCalendarStore = function () {
     dispatch(calendarSlice.actions.selectCalendarEvent(calendarEvent));
   };
 
-  return { calendarEvents, selectedCalendarEvent, selectCalendarEvent };
+  const unselectCalendarEvent = () => {
+    dispatch(calendarSlice.actions.selectNewCalendarEvent());
+  };
+
+  return {
+    calendarEvents,
+    selectedCalendarEvent,
+    selectCalendarEvent,
+    unselectCalendarEvent,
+  };
 };
 
 export default useCalendarStore;

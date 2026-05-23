@@ -1,3 +1,44 @@
 .btn {
   --bs-btn-border-radius: 5rem;
 }
+
+.floating-action-button {
+  --floating-action-button-shadow: 0 0.5rem 1rem #989898;
+  --floating-action-button-hover-shadow: 0 0.7rem 1.2rem #747474;
+
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 4rem;
+  height: 4rem;
+
+  border-radius: 1.5rem;
+
+  box-shadow: var(--floating-action-button-shadow);
+
+  transition:
+    background-color ease-in-out 0.2s,
+    box-shadow ease-in-out 0.2s;
+}
+
+.floating-action-button-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.floating-action-button:hover {
+  box-shadow: var(--floating-action-button-hover-shadow);
+}
+
+.floating-action-button:focus {
+  box-shadow:
+    0rem 0rem 0rem 0.2rem #ffffff,
+    0rem 0rem 0rem 0.4rem #0864e4,
+    var(--floating-action-button-hover-shadow);
+}

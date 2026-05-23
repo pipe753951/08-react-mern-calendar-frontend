@@ -15,7 +15,7 @@ const tempEvent: CalendarEvent = {
   note: "Se realizará una celebración en grupo.",
   startDateTimestamp: Date.now(),
   endDateTimestamp: addHours(new Date(), 2).getTime(),
-  bgColor: "#FAFAFA",
+  bgColor: "#ffffff",
   user: { id: "123", name: "Usuario" },
 };
 
@@ -28,6 +28,17 @@ const calendarSlice = createSlice({
   reducers: {
     selectCalendarEvent(state, { payload }: { payload: CalendarEvent }) {
       state.selectedCalendarEvent = payload;
+    },
+    selectNewCalendarEvent(state) {
+      state.selectedCalendarEvent = {
+        id: "new",
+        title: "",
+        note: "",
+        startDateTimestamp: Date.now(),
+        endDateTimestamp: addHours(new Date(), 2).getTime(),
+        bgColor: "#ffffff",
+        user: { id: "123", name: "Usuario" },
+      };
     },
   },
 });

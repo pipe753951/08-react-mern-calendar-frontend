@@ -1,4 +1,3 @@
-import { addHours } from "date-fns";
 import Modal from "react-modal";
 
 import type { CalendarModalFormValues } from "../../../types/interfaces/forms/CalendarModalFormValues";
@@ -28,7 +27,7 @@ const CalendarEventModal = function () {
       : new Date(),
     end: eventHasEndDate
       ? new Date(selectedCalendarEvent!.endDateTimestamp)
-      : addHours(new Date(), 2),
+      : new Date(),
   };
 
   const handleSubmit = (formValues: CalendarModalFormValues) => {
