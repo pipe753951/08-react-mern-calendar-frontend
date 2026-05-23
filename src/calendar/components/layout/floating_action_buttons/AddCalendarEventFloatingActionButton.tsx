@@ -1,9 +1,9 @@
 import { PlusIcon } from "lucide-react";
-import FloatingActionButton from "../../../shared/components/FloatingActionButton";
-import useUiStore from "../../../store/hooks/useUiStore";
-import useCalendarStore from "../../../store/hooks/useCalendarStore";
+import FloatingActionButton from "../../../../shared/components/FloatingActionButton";
+import useUiStore from "../../../../store/hooks/useUiStore";
+import useCalendarStore from "../../../../store/hooks/useCalendarStore";
 
-const AddEventFloatingActionButton = function () {
+const AddCalendarEventFloatingActionButton = function () {
   const { openDateModal } = useUiStore();
   const { selectNewCalendarEvent } = useCalendarStore();
 
@@ -19,4 +19,4 @@ const AddEventFloatingActionButton = function () {
   );
 };
 
-export default AddEventFloatingActionButton;
+export default AddCalendarEventFloatingActionButton;
