@@ -26,6 +26,10 @@ const calendarSlice = createSlice({
     selectedCalendarEvent: null,
   } as CalendarSliceState,
   reducers: {
+    insertNewEvent(state, { payload }: { payload: CalendarEvent }) {
+      state.calendarEvents.push(payload);
+    },
+
     selectCalendarEvent(state, { payload }: { payload: CalendarEvent }) {
       state.selectedCalendarEvent = payload;
     },
@@ -40,8 +44,11 @@ const calendarSlice = createSlice({
         user: { id: "123", name: "Usuario" },
       };
     },
-    insertNewEvent(state, { payload }: { payload: CalendarEvent }) {
-      state.calendarEvents.push(payload);
+    updateEvent(state, { payload }: { payload: CalendarEvent }) {
+      state.calendarEvents = state.calendarEvents.map((calendarEvent) => {
+        if (calendarEvent.id === payload.id) return payload;
+        return calendarEvent;
+      });
     },
   },
 });

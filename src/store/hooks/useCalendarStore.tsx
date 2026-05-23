@@ -37,6 +37,8 @@ const useCalendarStore = function () {
       );
       return;
     }
+
+    dispatch(calendarSlice.actions.updateEvent(calendarEvent));
   };
 
   return {
