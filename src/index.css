@@ -1,6 +1,6 @@
 :root {
-  --floating-action-button-shadow: 0 0.5rem 1rem #989898;
-  --floating-action-button-hover-shadow: 0 0.7rem 1.2rem #747474;
+  --floating-action-button-shadow: 0 0.5rem 1rem #0000005d;
+  --floating-action-button-hover-shadow: 0 0.7rem 1.2rem #0000007d;
 }
 
 .btn {

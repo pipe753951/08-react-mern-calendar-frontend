@@ -41,12 +41,22 @@ const useCalendarStore = function () {
     dispatch(calendarSlice.actions.updateEvent(calendarEvent));
   };
 
+  const startDeletingEvent = async () => {
+    // TODO: Llegar al backend.
+
+    //* Suponiendo que todo salió bien.
+
+    dispatch(calendarSlice.actions.deleteEvent());
+  };
+
   return {
     calendarEvents,
     selectedCalendarEvent,
+
     selectCalendarEvent,
     selectNewCalendarEvent,
     startUploadingOfCalendarEvent,
+    startDeletingEvent,
   };
 };
 

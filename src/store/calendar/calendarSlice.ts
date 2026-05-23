@@ -50,6 +50,15 @@ const calendarSlice = createSlice({
         return calendarEvent;
       });
     },
+    deleteEvent(state) {
+      if (state.calendarEvents.length && state.selectedCalendarEvent) {
+        state.calendarEvents = state.calendarEvents.filter((calendarEvent) => {
+          return calendarEvent.id !== state.selectedCalendarEvent!.id;
+        });
+
+        state.selectedCalendarEvent = null;
+      }
+    },
   },
 });
 
