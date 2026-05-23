@@ -3,7 +3,7 @@ import { useMemo, useState, type ChangeEvent, type SubmitEvent } from "react";
 import { compareAsc, differenceInSeconds } from "date-fns";
 import { toast } from "sonner";
 
-import type { CalendarModalFormValues } from "../../../types/interfaces/forms/CalendarModalFormValues";
+import type { CalendarModalFormValues } from "../../../types/interfaces/forms/CalendarModalFormValues.interface";
 import CalendarFormDatetime from "../form/CalendarFormDatetime";
 import { SaveIcon } from "lucide-react";
 

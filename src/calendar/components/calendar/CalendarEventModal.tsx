@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 
-import type { CalendarModalFormValues } from "../../../types/interfaces/forms/CalendarModalFormValues";
+import type { CalendarModalFormValues } from "../../../types/interfaces/forms/CalendarModalFormValues.interface";
 
 import useCalendarStore from "../../../store/hooks/useCalendarStore";
 import useUiStore from "../../../store/hooks/useUiStore";
