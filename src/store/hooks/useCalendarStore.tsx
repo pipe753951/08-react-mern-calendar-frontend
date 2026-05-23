@@ -20,11 +20,31 @@ const useCalendarStore = function () {
     dispatch(calendarSlice.actions.selectNewCalendarEvent());
   };
 
+  const startUploadingOfCalendarEvent = async (
+    calendarEvent: CalendarEvent,
+  ) => {
+    // TODO: Llegar al backend.
+
+    //* Suponiendo que todo salió bien.
+    const isCreatingCalendarEvent = calendarEvent.id === "new";
+
+    if (isCreatingCalendarEvent) {
+      dispatch(
+        calendarSlice.actions.insertNewEvent({
+          ...calendarEvent,
+          id: Date.now().toString(),
+        }),
+      );
+      return;
+    }
+  };
+
   return {
     calendarEvents,
     selectedCalendarEvent,
     selectCalendarEvent,
     selectNewCalendarEvent,
+    startUploadingOfCalendarEvent,
   };
 };
 

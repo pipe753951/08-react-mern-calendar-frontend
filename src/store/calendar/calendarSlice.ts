@@ -40,6 +40,9 @@ const calendarSlice = createSlice({
         user: { id: "123", name: "Usuario" },
       };
     },
+    insertNewEvent(state, { payload }: { payload: CalendarEvent }) {
+      state.calendarEvents.push(payload);
+    },
   },
 });
 
