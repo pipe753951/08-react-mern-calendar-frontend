@@ -16,7 +16,7 @@ const useCalendarStore = function () {
     dispatch(calendarSlice.actions.selectCalendarEvent(calendarEvent));
   };
 
-  const unselectCalendarEvent = () => {
+  const selectNewCalendarEvent = () => {
     dispatch(calendarSlice.actions.selectNewCalendarEvent());
   };
 
@@ -24,7 +24,7 @@ const useCalendarStore = function () {
     calendarEvents,
     selectedCalendarEvent,
     selectCalendarEvent,
-    unselectCalendarEvent,
+    selectNewCalendarEvent,
   };
 };
 

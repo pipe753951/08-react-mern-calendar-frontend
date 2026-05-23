@@ -5,10 +5,10 @@ import useCalendarStore from "../../../store/hooks/useCalendarStore";
 
 const AddEventFloatingActionButton = function () {
   const { openDateModal } = useUiStore();
-  const { unselectCalendarEvent } = useCalendarStore();
+  const { selectNewCalendarEvent } = useCalendarStore();
 
   const handleClick = () => {
-    unselectCalendarEvent();
+    selectNewCalendarEvent();
     openDateModal();
   };
 
