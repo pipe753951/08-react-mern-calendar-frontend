@@ -1,7 +1,7 @@
 import useStoreDispatch from "./useStoreDispatch";
 import useStoreSelector from "./useStoreSelector";
 
-import uiSlice from "../store/ui/uiSlice";
+import uiSlice from "../ui/uiSlice";
 
 const useUiStore = function () {
   const dispatch = useStoreDispatch();

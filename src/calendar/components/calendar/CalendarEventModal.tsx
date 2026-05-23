@@ -2,8 +2,8 @@ import Modal from "react-modal";
 
 import type { CalendarModalFormValues } from "../../../types/interfaces/forms/CalendarModalFormValues";
 
-import useCalendarStore from "../../../hooks/useCalendarStore";
-import useUiStore from "../../../hooks/useUiStore";
+import useCalendarStore from "../../../store/hooks/useCalendarStore";
+import useUiStore from "../../../store/hooks/useUiStore";
 
 import AppModal from "../../../shared/components/AppModal";
 import CalendarEventModalForm from "./CalendarEventModalForm";

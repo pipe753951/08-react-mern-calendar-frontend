@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { type View as CalendarView } from "react-big-calendar";
 
-import useCalendarStore from "../../../hooks/useCalendarStore";
-import useUiStore from "../../../hooks/useUiStore";
+import useCalendarStore from "../../../store/hooks/useCalendarStore";
+import useUiStore from "../../../store/hooks/useUiStore";
 import useValidatedCalendarView from "../../hooks/useValidatedCalendarView";
 
 import CalendarEventModal from "../../components/calendar/CalendarEventModal";
