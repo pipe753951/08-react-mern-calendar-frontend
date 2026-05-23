@@ -18,8 +18,6 @@ const CalendarLayout = function () {
       </div>
       {/* Floating action button */}
       <AddEventFloatingActionButton />
-      {/* Container for modals */}
-      <div id="modal-container"></div>
     </>
   );
 };
