@@ -14,19 +14,20 @@ import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent.inte
 
 const CalendarPage = function () {
   const { openDateModal } = useUiStore();
-  const { calendarEvents } = useCalendarStore();
+  const { calendarEvents, selectCalendarEvent } = useCalendarStore();
 
   const [selectedDate, setCurrentDate] = useState<Date>(new Date());
 
   const { calendarView, setCalendarView } = useValidatedCalendarView();
 
-  const handleCalendarEventDoubleClick = (event: CalendarEvent) => {
-    console.log({ doubleClickEvent: event });
+  const handleCalendarEventDoubleClick = (calendarEvent: CalendarEvent) => {
+    console.log({ doubleClickEvent: calendarEvent });
     openDateModal();
   };
 
-  const handleCalendarEventSelect = (event: CalendarEvent) => {
-    console.log({ selectEvent: event });
+  const handleCalendarEventSelect = (calendarEvent: CalendarEvent) => {
+    console.log({ selectEvent: calendarEvent });
+    selectCalendarEvent(calendarEvent);
   };
 
   const handleCalendarViewChange = (view: CalendarView) => {

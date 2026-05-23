@@ -1,9 +1,22 @@
+import type { CalendarEvent } from "../types/interfaces/CalendarEvent.interface";
+
+import useStoreDispatch from "./useStoreDispatch";
 import useStoreSelector from "./useStoreSelector";
 
-const useCalendarStore = function () {
-  const { calendarEvents } = useStoreSelector((state) => state.calendar);
+import calendarSlice from "../store/calendar/calendarSlice";
 
-  return { calendarEvents };
+const useCalendarStore = function () {
+  const dispatch = useStoreDispatch();
+
+  const { calendarEvents, selectedCalendarEvent } = useStoreSelector(
+    (state) => state.calendar,
+  );
+
+  const selectCalendarEvent = (calendarEvent: CalendarEvent) => {
+    dispatch(calendarSlice.actions.selectCalendarEvent(calendarEvent));
+  };
+
+  return { calendarEvents, selectedCalendarEvent, selectCalendarEvent };
 };
 
 export default useCalendarStore;

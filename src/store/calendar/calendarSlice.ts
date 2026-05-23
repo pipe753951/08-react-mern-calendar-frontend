@@ -4,6 +4,11 @@ import { addHours } from "date-fns";
 
 import type { CalendarEvent } from "../../types/interfaces/CalendarEvent.interface";
 
+interface CalendarSliceState {
+  calendarEvents: CalendarEvent[];
+  selectedCalendarEvent: CalendarEvent | null;
+}
+
 const tempEvent: CalendarEvent = {
   id: Date.now().toString(),
   title: "Cumpleaños del lider",
@@ -18,9 +23,13 @@ const calendarSlice = createSlice({
   name: "calendar",
   initialState: {
     calendarEvents: [tempEvent] as CalendarEvent[],
-    activeEvent: null,
+    selectedCalendarEvent: null,
+  } as CalendarSliceState,
+  reducers: {
+    selectCalendarEvent(state, { payload }: { payload: CalendarEvent }) {
+      state.selectedCalendarEvent = payload;
+    },
   },
-  reducers: {},
 });
 
 export default calendarSlice;
