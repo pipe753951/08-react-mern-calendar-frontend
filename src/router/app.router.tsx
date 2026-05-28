@@ -10,7 +10,7 @@ import LoginPage from "../auth/pages/login/LoginPage";
 import RegisterPage from "../auth/pages/register/RegisterPage";
 
 const AppRouter = function () {
-  const authStatus: AuthStatus = "authenticated" as AuthStatus;
+  const authStatus: AuthStatus = "not-authenticated" as AuthStatus;
 
   return (
     <BrowserRouter>
