@@ -11,7 +11,7 @@ type FormValidationResults = Record<string, string | null>;
 const useForm = function <FormObject extends Record<string, unknown>>(
   initialForm: FormObject,
   formValidations?: {
-    [Property in keyof FormObject]: (
+    [Property in keyof FormObject]?: (
       value: FormObject[Property],
     ) => string | null;
   },
@@ -29,6 +29,7 @@ const useForm = function <FormObject extends Record<string, unknown>>(
 
     formFieldsToValidate.forEach((formField) => {
       const validateFormField = formValidations[formField];
+      if (!validateFormField) return;
 
       validatedFormValues[formField as string] = validateFormField(
         formState[formField],
