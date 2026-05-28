@@ -2,6 +2,7 @@ import type React from "react";
 
 import useForm from "../../../shared/hooks/useForm";
 import useAuthStore from "../../../store/hooks/useAuthStore";
+import { toast } from "sonner";
 
 const LoginPage = function () {
   const { startLogin } = useAuthStore();
@@ -14,9 +15,16 @@ const LoginPage = function () {
     },
   );
 
+  const handleLoginError = (
+    errorMessage: string,
+    errorDescription?: string,
+  ) => {
+    toast.error(errorMessage, { description: errorDescription });
+  };
+
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    startLogin(formState);
+    startLogin(formState, handleLoginError);
   };
 
   return (

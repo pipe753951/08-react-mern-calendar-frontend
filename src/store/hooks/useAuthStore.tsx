@@ -17,7 +17,10 @@ const useAuthStore = function () {
   );
   const dispatch = useStoreDispatch();
 
-  const startLogin = async ({ email, password }: StartLoginParameters) => {
+  const startLogin = async (
+    { email, password }: StartLoginParameters,
+    errorCallback?: (errorMessage: string, errorDescription?: string) => void,
+  ) => {
     console.log({ email, password });
 
     try {
@@ -45,9 +48,8 @@ const useAuthStore = function () {
       dispatch(
         authSlice.actions.setLoggedOutState("Credenciales incorrectas."),
       );
-      setTimeout(() => {
-        dispatch(authSlice.actions.clearErrorMessage());
-      }, 10);
+      errorCallback?.("Hubo un error.", "Verifica tus credenciales");
+
       throw new Error("Something wrong happened", { cause: error });
     }
   };
