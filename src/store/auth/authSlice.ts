@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit/react";
 import type { User } from "../../types/interfaces/User.interface";
+import type { AuthStatus } from "../../types/AuthStatus.types";
 
 interface AuthSliceState {
-  authStatus: "checking" | "authenticated" | "not-authenticated";
+  authStatus: AuthStatus;
   user: User | undefined;
   errorMessage: string | null;
 }
