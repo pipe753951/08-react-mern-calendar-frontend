@@ -4,7 +4,7 @@ import type { AuthStatus } from "../../types/AuthStatus.types";
 
 interface AuthSliceState {
   authStatus: AuthStatus;
-  user: User | undefined;
+  user: User | null;
   errorMessage: string | null;
 }
 
@@ -12,19 +12,30 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     authStatus: "checking",
-    user: undefined,
+    user: null,
     errorMessage: null,
   } as AuthSliceState,
   reducers: {
-    checkAuth(state) {
-      state.authStatus = "checking";
-      state.user = undefined;
+    clearErrorMessage(state) {
       state.errorMessage = null;
     },
-    login(state, { payload }: { payload: User }) {
+    setCheckingAuthState(state) {
+      state.authStatus = "checking";
+      state.user = null;
+      state.errorMessage = null;
+    },
+    setLoggedInState(state, { payload }: { payload: User }) {
       state.authStatus = "authenticated";
       state.user = payload;
       state.errorMessage = null;
+    },
+    setLoggedOutState(
+      state,
+      { payload: errorMessagePayload }: { payload: string | undefined },
+    ) {
+      state.authStatus = "not-authenticated";
+      state.user = null;
+      state.errorMessage = errorMessagePayload || null;
     },
   },
 });
