@@ -1,8 +1,11 @@
 import type React from "react";
 
 import useForm from "../../../shared/hooks/useForm";
+import useAuthStore from "../../../store/hooks/useAuthStore";
 
 const LoginPage = function () {
+  const { startLogin } = useAuthStore();
+
   const { formState, changeInput } = useForm(
     { email: "", password: "" },
     {
@@ -13,7 +16,7 @@ const LoginPage = function () {
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.debug({ event, formState });
+    startLogin(formState);
   };
 
   return (
