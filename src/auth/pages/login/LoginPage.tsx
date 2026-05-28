@@ -29,7 +29,7 @@ const LoginPage = function () {
 
   return (
     <>
-      <h1 className="mb-3 text-center">Iniciar sesión</h1>
+      <h1 className="mb-3">Iniciar sesión</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2">

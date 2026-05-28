@@ -14,7 +14,7 @@
   border: 1px solid var(--bs-border-color);
   border-radius: 1rem;
 
-  box-shadow: 0 1rem 3rem var(--bs-tertiary-bg);
+  box-shadow: 0 1rem 3rem -2rem var(--bs-dark);
 }
 
 .auth-actions {

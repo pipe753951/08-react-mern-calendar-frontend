@@ -15,7 +15,7 @@ const RegisterPage = function () {
 
   return (
     <>
-      <h1 className="mb-3 text-center">Regístrate</h1>
+      <h1 className="mb-3">Regístrate</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2">
