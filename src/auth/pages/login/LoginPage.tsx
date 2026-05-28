@@ -3,6 +3,7 @@ import type React from "react";
 import useForm from "../../../shared/hooks/useForm";
 import useAuthStore from "../../../store/hooks/useAuthStore";
 import { toast } from "sonner";
+import { Link } from "react-router";
 
 const LoginPage = function () {
   const { startLogin } = useAuthStore();
@@ -29,7 +30,7 @@ const LoginPage = function () {
 
   return (
     <>
-      <h1 className="mb-3">Iniciar sesión</h1>
+      <h1 className="auth-card-header">Iniciar sesión</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2">
@@ -52,6 +53,12 @@ const LoginPage = function () {
             onChange={changeInput}
           />
         </div>
+
+        <p className="my-3">
+          ¿No te registraste?&#160;
+          <Link to="/auth/register">Regístrate</Link>
+          <span>&#46;</span>
+        </p>
         <div className="form-group auth-actions">
           <button type="submit" className="btn btn-primary w-100">
             Iniciar sesión

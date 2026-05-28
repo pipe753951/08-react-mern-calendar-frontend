@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import useForm from "../../../shared/hooks/useForm";
 
 const RegisterPage = function () {
@@ -15,7 +16,7 @@ const RegisterPage = function () {
 
   return (
     <>
-      <h1 className="mb-3">Regístrate</h1>
+      <h1 className="mb-4">Regístrate</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2">
@@ -61,7 +62,13 @@ const RegisterPage = function () {
           />
         </div>
 
-        <div className="form-group auth-actions">
+        <p className="my-3">
+          ¿Ya te registraste?&#160;
+          <Link to="/auth/login">Inicia sesión</Link>
+          <span>&#46;</span>
+        </p>
+
+        <div className="form-group">
           <button type="submit" className="btn btn-primary w-100">
             Registrarse
           </button>
