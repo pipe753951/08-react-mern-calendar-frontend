@@ -94,7 +94,7 @@ const useAuthStore = function () {
       errorCallback?.("Hubo un error.", "Verifica tus credenciales");
 
       if (import.meta.env.DEV) {
-        throw new Error("Something wrong happened when log in a user.", {
+        throw new Error("Something wrong happened while logging in a user.", {
           cause: error,
         });
       }
