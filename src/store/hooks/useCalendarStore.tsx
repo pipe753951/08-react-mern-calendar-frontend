@@ -1,11 +1,15 @@
 import type { CalendarEvent } from "../../types/interfaces/CalendarEvent.interface";
-import type { DatabaseCalendarEvent } from "../../types/interfaces/DatabaseCalendarEvent.interface";
-import type { User } from "../../types/interfaces/User.interface";
 
 import type { CreateCalendarEventSuccessResponse } from "../../types/interfaces/responses/CreateCalendarEventSuccessResponse.interface";
+import type { GetCalendarEventsSuccessResponse } from "../../types/interfaces/responses/GetCalendarEventsSuccessResponse.interface";
 
 import useStoreDispatch from "./useStoreDispatch";
 import useStoreSelector from "./useStoreSelector";
+
+import {
+  mapDbCalendarEventToCalendarEvent,
+  mapGotDbCalendarEventsToCalendarEvents,
+} from "../../calendar/helpers/dbCalendarEventToCalendarEvent.mapper";
 
 import calendarSlice from "../calendar/calendarSlice";
 import calendarApi from "../../shared/api/calendarApi";
@@ -19,23 +23,6 @@ const useCalendarStore = function () {
 
   const { user } = useStoreSelector((state) => state.auth);
 
-  const _mapDbCalendarEventToCalendarEvent = (
-    dbCalendarEvent: DatabaseCalendarEvent,
-    userToAssign: User,
-  ): CalendarEvent => {
-    return {
-      id: dbCalendarEvent.id,
-      title: dbCalendarEvent.title,
-      note: dbCalendarEvent.note,
-
-      bgColor: "#0062ff",
-      startDateTimestamp: new Date(dbCalendarEvent.start).getTime(),
-      endDateTimestamp: new Date(dbCalendarEvent.end).getTime(),
-
-      user: userToAssign!,
-    };
-  };
-
   const _startUploadingOfNewCalendarEvent = async (
     calendarEvent: CalendarEvent,
   ) => {
@@ -47,9 +34,7 @@ const useCalendarStore = function () {
         note: calendarEvent.note,
       });
 
-    console.debug({ responseData });
-
-    const mappedCalendarEvent = _mapDbCalendarEventToCalendarEvent(
+    const mappedCalendarEvent = mapDbCalendarEventToCalendarEvent(
       responseData.calendarEvent,
       user!,
     );
@@ -90,8 +75,15 @@ const useCalendarStore = function () {
 
   const startLoadingAllCalendarEvents = async () => {
     try {
-      const { data: responseData } = await calendarApi.get("/events");
+      const { data: responseData } =
+        await calendarApi.get<GetCalendarEventsSuccessResponse>("/events");
       console.debug({ responseData });
+
+      const mappedCalendarEvents = mapGotDbCalendarEventsToCalendarEvents(
+        responseData.calendarEvents,
+      );
+
+      console.debug({ mappedCalendarEvents });
     } catch (error) {
       if (import.meta.env.PROD) return;
 
@@ -101,8 +93,6 @@ const useCalendarStore = function () {
       );
     }
   };
-
-  console.debug({ calendarEvents });
 
   return {
     calendarEvents,

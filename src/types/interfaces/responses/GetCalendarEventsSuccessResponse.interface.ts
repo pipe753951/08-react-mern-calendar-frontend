@@ -1,15 +1,16 @@
 export interface GetCalendarEventsSuccessResponse {
   ok: boolean;
-  calendarEvents: DatabaseCalendarEventsWithUserInfo[];
+  calendarEvents: DatabaseCalendarEventWithUserInfo[];
 }
 
-export interface DatabaseCalendarEventsWithUserInfo {
+export interface DatabaseCalendarEventWithUserInfo {
+  id: string;
+
   title: string;
   note: string;
   start: string;
   end: string;
   user: GetCalendarEventsResponseUser;
-  id: string;
 }
 
 export interface GetCalendarEventsResponseUser {

@@ -11,12 +11,21 @@ import useValidatedCalendarView from "../../../hooks/useValidatedCalendarView";
 import BigCalendarContainer from "../../../components/calendar/BigCalendarContainer";
 
 const CalendarPageMainContent = function () {
+  const [startedToLoadCalendarEvents, setStartedToLoadCalendarEvents] =
+    useState(false);
+
   const { openDateModal } = useUiStore();
-  const { calendarEvents, selectCalendarEvent } = useCalendarStore();
+  const { calendarEvents, selectCalendarEvent, startLoadingAllCalendarEvents } =
+    useCalendarStore();
 
   const [selectedDate, setCurrentDate] = useState<Date>(new Date());
 
   const { calendarView, setCalendarView } = useValidatedCalendarView();
+
+  if (!startedToLoadCalendarEvents) {
+    startLoadingAllCalendarEvents();
+    setStartedToLoadCalendarEvents(true);
+  }
 
   const handleCalendarEventDoubleClick = () => {
     openDateModal();
