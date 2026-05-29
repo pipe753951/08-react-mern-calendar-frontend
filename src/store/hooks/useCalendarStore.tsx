@@ -65,6 +65,14 @@ const useCalendarStore = function () {
     dispatch(calendarSlice.actions.selectNewCalendarEvent());
   };
 
+  const startDeletingEvent = async () => {
+    // TODO: Llegar al backend.
+
+    //* Suponiendo que todo salió bien.
+
+    dispatch(calendarSlice.actions.deleteEvent());
+  };
+
   const startUploadingOfCalendarEvent = async (
     calendarEvent: CalendarEvent,
   ) => {
@@ -80,12 +88,18 @@ const useCalendarStore = function () {
     }
   };
 
-  const startDeletingEvent = async () => {
-    // TODO: Llegar al backend.
+  const startLoadingAllCalendarEvents = async () => {
+    try {
+      const { data: responseData } = await calendarApi.get("/events");
+      console.debug({ responseData });
+    } catch (error) {
+      if (import.meta.env.PROD) return;
 
-    //* Suponiendo que todo salió bien.
-
-    dispatch(calendarSlice.actions.deleteEvent());
+      throw new Error(
+        "Something was unexpected while getting all calendar events from backend",
+        { cause: error },
+      );
+    }
   };
 
   console.debug({ calendarEvents });
@@ -96,8 +110,9 @@ const useCalendarStore = function () {
 
     selectCalendarEvent,
     selectNewCalendarEvent,
-    startUploadingOfCalendarEvent,
     startDeletingEvent,
+    startUploadingOfCalendarEvent,
+    startLoadingAllCalendarEvents,
   };
 };
 
