@@ -17,7 +17,7 @@
   box-shadow: 0 1rem 3rem -2rem var(--bs-dark);
 }
 
-.auth-card-header {
+.auth-card-title {
   padding-top: 0.2rem;
   padding-bottom: 0.4rem;
   padding-left: 0.5rem;

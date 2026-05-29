@@ -1,7 +1,12 @@
 import { Link } from "react-router";
+
 import useForm from "../../../shared/hooks/useForm";
+import showAuthErrorOnUi from "../../utilities/showAuthErrorOnUi";
+
+import useAuthStore from "../../../store/hooks/useAuthStore";
 
 const RegisterPage = function () {
+  const { startRegister } = useAuthStore();
   const { formState, changeInput } = useForm({
     name: "",
     email: "",
@@ -11,12 +16,13 @@ const RegisterPage = function () {
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.debug({ event, formState });
+    console.debug({ formState });
+    startRegister(formState, showAuthErrorOnUi);
   };
 
   return (
     <>
-      <h1 className="mb-4">Regístrate</h1>
+      <h1 className="auth-card-title">Regístrate</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2">

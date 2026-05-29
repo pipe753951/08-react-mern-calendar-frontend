@@ -1,9 +1,10 @@
 import type React from "react";
+import { Link } from "react-router";
 
 import useForm from "../../../shared/hooks/useForm";
 import useAuthStore from "../../../store/hooks/useAuthStore";
-import { toast } from "sonner";
-import { Link } from "react-router";
+
+import showAuthErrorOnUi from "../../utilities/showAuthErrorOnUi";
 
 const LoginPage = function () {
   const { startLogin } = useAuthStore();
@@ -16,21 +17,14 @@ const LoginPage = function () {
     },
   );
 
-  const handleLoginError = (
-    errorMessage: string,
-    errorDescription?: string,
-  ) => {
-    toast.error(errorMessage, { description: errorDescription });
-  };
-
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    startLogin(formState, handleLoginError);
+    startLogin(formState, showAuthErrorOnUi);
   };
 
   return (
     <>
-      <h1 className="auth-card-header">Iniciar sesión</h1>
+      <h1 className="auth-card-title">Iniciar sesión</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-2">
