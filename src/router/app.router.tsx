@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 
-import type { AuthStatus } from "../types/AuthStatus.types";
+import useAuthStore from "../store/hooks/useAuthStore";
 
 import AuthLayout from "../auth/layouts/AuthLayout";
 import CalendarLayout from "../calendar/layouts/CalendarLayout";
@@ -8,9 +8,15 @@ import CalendarLayout from "../calendar/layouts/CalendarLayout";
 import CalendarPage from "../calendar/pages/calendar/CalendarPage";
 import LoginPage from "../auth/pages/login/LoginPage";
 import RegisterPage from "../auth/pages/register/RegisterPage";
+import SplashScreen from "../shared/components/SplashScreen";
 
 const AppRouter = function () {
-  const authStatus: AuthStatus = "not-authenticated" as AuthStatus;
+  const { authStatus, checkJwtAuthToken } = useAuthStore();
+
+  if (authStatus === "not-checked") {
+    checkJwtAuthToken();
+    return <SplashScreen />;
+  }
 
   return (
     <BrowserRouter>

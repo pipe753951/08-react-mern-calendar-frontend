@@ -11,7 +11,7 @@ interface AuthSliceState {
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    authStatus: "checking",
+    authStatus: "not-checked",
     user: null,
     errorMessage: null,
   } as AuthSliceState,

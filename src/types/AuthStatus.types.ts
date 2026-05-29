@@ -1,1 +1,5 @@
-export type AuthStatus = "checking" | "not-authenticated" | "authenticated";
+export type AuthStatus =
+  | "not-checked"
+  | "checking"
+  | "not-authenticated"
+  | "authenticated";
