@@ -1,0 +1,57 @@
+.dropdown-menu.calendar-navbar-user-dropdown-menu {
+  --bs-dropdown-border-radius: 0.7rem;
+  width: 20rem;
+}
+
+.calendar-navbar-user-dropdown-toggle-button {
+  padding: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+}
+
+.calendar-navbar-user-dropdown-toggle-button:focus-visible {
+  outline-color: var(--bs-primary);
+  outline-offset: 1px;
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+.calendar-navbar-dropdown-user-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+
+  color: var(--bs-primary);
+}
+
+.calendar-navbar-dropdown-user-details {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  color: var(--bs-primary);
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.calendar-navbar-dropdown-user-details-user-circle {
+  min-width: 5rem;
+  min-height: 5rem;
+}
+
+.calendar-navbar-dropdown-user-details-heading {
+  text-align: center;
+  font-size: 1.4rem;
+
+  margin: 0;
+}
+
+.calendar-navbar-dropdown-logout-item {
+  --bs-dropdown-link-color: var(--bs-danger);
+  --bs-dropdown-link-hover-color: var(--bs-danger);
+  --bs-dropdown-link-active-bg: var(--bs-danger);
+}
