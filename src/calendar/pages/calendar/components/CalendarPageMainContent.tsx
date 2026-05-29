@@ -18,19 +18,15 @@ const CalendarPageMainContent = function () {
 
   const { calendarView, setCalendarView } = useValidatedCalendarView();
 
-  const handleCalendarEventDoubleClick = (calendarEvent: CalendarEvent) => {
-    console.log({ doubleClickEvent: calendarEvent });
+  const handleCalendarEventDoubleClick = () => {
     openDateModal();
   };
 
   const handleCalendarEventSelect = (calendarEvent: CalendarEvent) => {
-    console.log({ selectEvent: calendarEvent });
     selectCalendarEvent(calendarEvent);
   };
 
   const handleCalendarViewChange = (view: CalendarView) => {
-    console.log({ view });
-
     setCalendarView(view);
   };
 

@@ -58,7 +58,6 @@ const useForm = function <FormObject extends Record<string, unknown>>(
 
     if (!formState[name] && formState[name] !== "") {
       if (!name) throw new Error("You didn't provided a input name");
-      console.debug(name);
 
       throw new Error(
         `Input "${name as string}" doesn't exist on formState of useForm`,

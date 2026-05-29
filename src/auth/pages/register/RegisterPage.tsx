@@ -16,7 +16,6 @@ const RegisterPage = function () {
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.debug({ formState });
     startRegister(formState, showAuthErrorOnUi);
   };
 

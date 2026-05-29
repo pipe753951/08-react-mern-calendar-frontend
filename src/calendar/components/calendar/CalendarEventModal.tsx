@@ -33,7 +33,6 @@ const CalendarEventModal = function () {
   };
 
   const handleSubmit = async (formValues: CalendarModalFormValues) => {
-    console.log({ formValues });
     const modifiedEvent: CalendarEvent = {
       ...selectedCalendarEvent!,
       title: formValues.eventTitle,

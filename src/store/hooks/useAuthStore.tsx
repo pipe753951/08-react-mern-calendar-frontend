@@ -50,8 +50,6 @@ const useAuthStore = function () {
     { email, password }: StartLoginParameters,
     errorCallback?: (errorMessage: string, errorDescription?: string) => void,
   ) => {
-    console.log({ email, password });
-
     try {
       dispatch(authSlice.actions.setCheckingAuthState());
 
@@ -84,8 +82,6 @@ const useAuthStore = function () {
     { name, email, password }: StartRegisterParameters,
     errorCallback?: (errorMessage: string, errorDescription?: string) => void,
   ) => {
-    console.log({ email, password });
-
     try {
       dispatch(authSlice.actions.setCheckingAuthState());
 
