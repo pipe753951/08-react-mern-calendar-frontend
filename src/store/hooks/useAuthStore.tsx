@@ -46,6 +46,29 @@ const useAuthStore = function () {
     dispatch(authSlice.actions.setLoggedInState(user));
   };
 
+  const checkJwtAuthToken = async () => {
+    const userJwtToken = localStorage.getItem("token");
+    if (!userJwtToken) {
+      _expireAuth();
+      return;
+    }
+
+    try {
+      const { data: responseData } =
+        await calendarApi.post<RenewJwtTokenSuccessResponse>("/auth/renew");
+
+      _setAuthUser({
+        jwtToken: responseData.token,
+        user: { name: responseData.name, uid: responseData.uid },
+      });
+    } catch (error) {
+      _expireAuth();
+      if (import.meta.env.DEV) {
+        throw new Error("Error while renewing JWT token.", { cause: error });
+      }
+    }
+  };
+
   const startLogin = async (
     { email, password }: StartLoginParameters,
     errorCallback?: (errorMessage: string, errorDescription?: string) => void,
@@ -114,29 +137,6 @@ const useAuthStore = function () {
         throw new Error("Something wrong happened while registering a user", {
           cause: error,
         });
-      }
-    }
-  };
-
-  const checkJwtAuthToken = async () => {
-    const userJwtToken = localStorage.getItem("token");
-    if (!userJwtToken) {
-      _expireAuth();
-      return;
-    }
-
-    try {
-      const { data: responseData } =
-        await calendarApi.post<RenewJwtTokenSuccessResponse>("/auth/renew");
-
-      _setAuthUser({
-        jwtToken: responseData.token,
-        user: { name: responseData.name, uid: responseData.uid },
-      });
-    } catch (error) {
-      _expireAuth();
-      if (import.meta.env.DEV) {
-        throw new Error("Error while renewing JWT token.", { cause: error });
       }
     }
   };
