@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 
-import CalendarNavbar from "../components/layout/CalendarNavbar";
+import CalendarNavbar from "../components/layout/navbar/CalendarNavbar";
 
 const CalendarLayout = function () {
   return (

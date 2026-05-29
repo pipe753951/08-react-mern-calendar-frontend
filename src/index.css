@@ -62,7 +62,8 @@
   box-shadow: var(--floating-action-button-hover-shadow);
 }
 
-.floating-action-button:focus {
+.floating-action-button:focus,
+.floating-action-button:focus-visible {
   box-shadow:
     0rem 0rem 0rem 0.2rem #ffffff,
     0rem 0rem 0rem 0.4rem var(--bs-btn-border-color),

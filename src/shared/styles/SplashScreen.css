@@ -1,0 +1,36 @@
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  padding: 5rem;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.splash-screen-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--bs-primary);
+  color: #ffffff;
+
+  border-radius: 5vw;
+
+  width: 20vw;
+  height: 20vw;
+}
+
+.splash-screen-icon {
+  width: 14vw;
+  height: 14vw;
+}
+
+.spinner-border.splash-screen-spinner {
+  --bs-spinner-width: 7vw;
+  --bs-spinner-height: 7vw;
+  --bs-spinner-border-width: 0.7vw;
+}

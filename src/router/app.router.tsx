@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 
-import type { AuthStatus } from "../types/AuthStatus.types";
+import useAuthStore from "../store/hooks/useAuthStore";
 
 import AuthLayout from "../auth/layouts/AuthLayout";
 import CalendarLayout from "../calendar/layouts/CalendarLayout";
@@ -10,7 +10,7 @@ import LoginPage from "../auth/pages/login/LoginPage";
 import RegisterPage from "../auth/pages/register/RegisterPage";
 
 const AppRouter = function () {
-  const authStatus: AuthStatus = "authenticated" as AuthStatus;
+  const { authStatus } = useAuthStore();
 
   return (
     <BrowserRouter>

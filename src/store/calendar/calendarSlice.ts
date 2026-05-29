@@ -16,7 +16,7 @@ const tempEvent: CalendarEvent = {
   startDateTimestamp: Date.now(),
   endDateTimestamp: addHours(new Date(), 2).getTime(),
   bgColor: "#ffffff",
-  user: { id: "123", name: "Usuario" },
+  user: { uid: "123", name: "Usuario" },
 };
 
 const calendarSlice = createSlice({
@@ -41,7 +41,7 @@ const calendarSlice = createSlice({
         startDateTimestamp: Date.now(),
         endDateTimestamp: addHours(new Date(), 2).getTime(),
         bgColor: "#ffffff",
-        user: { id: "123", name: "Usuario" },
+        user: { uid: "123", name: "Usuario" },
       };
     },
     updateEvent(state, { payload }: { payload: CalendarEvent }) {
