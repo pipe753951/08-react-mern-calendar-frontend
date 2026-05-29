@@ -8,15 +8,9 @@ import CalendarLayout from "../calendar/layouts/CalendarLayout";
 import CalendarPage from "../calendar/pages/calendar/CalendarPage";
 import LoginPage from "../auth/pages/login/LoginPage";
 import RegisterPage from "../auth/pages/register/RegisterPage";
-import SplashScreen from "../shared/components/SplashScreen";
 
 const AppRouter = function () {
-  const { authStatus, checkJwtAuthToken } = useAuthStore();
-
-  if (authStatus === "not-checked") {
-    checkJwtAuthToken();
-    return <SplashScreen />;
-  }
+  const { authStatus } = useAuthStore();
 
   return (
     <BrowserRouter>
