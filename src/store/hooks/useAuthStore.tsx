@@ -101,6 +101,10 @@ const useAuthStore = function () {
     }
   };
 
+  const startLogout = async () => {
+    _expireAuth();
+  };
+
   const startRegister = async (
     { name, email, password }: StartRegisterParameters,
     errorCallback?: (errorMessage: string, errorDescription?: string) => void,
@@ -148,6 +152,7 @@ const useAuthStore = function () {
 
     checkJwtAuthToken,
     startLogin,
+    startLogout,
     startRegister,
   };
 };

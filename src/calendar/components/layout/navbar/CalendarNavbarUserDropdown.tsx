@@ -5,7 +5,7 @@ import useAuthStore from "../../../../store/hooks/useAuthStore";
 import "../../../styles/CalendarNavbarUserDropdown.css";
 
 const CalendarNavbarUserDropdown = function () {
-  const { user } = useAuthStore();
+  const { user, startLogout } = useAuthStore();
 
   return (
     <div className="dropdown">
@@ -30,14 +30,14 @@ const CalendarNavbarUserDropdown = function () {
           <div className="dropdown-divider"></div>
         </li>
         <li>
-          <a
+          <button
             className="dropdown-item calendar-navbar-dropdown-logout-item"
-            href="#"
+            onClick={startLogout}
           >
             <DoorOpenIcon />
             &#160;
             <span>Cerrar sesión</span>
-          </a>
+          </button>
         </li>
       </ul>
     </div>
