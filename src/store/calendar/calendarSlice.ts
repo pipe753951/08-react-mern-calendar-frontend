@@ -6,30 +6,54 @@ import type { CalendarEvent } from "../../types/interfaces/CalendarEvent.interfa
 
 interface CalendarSliceState {
   calendarEvents: CalendarEvent[];
+  isLoadingCalendarEvents: boolean;
   selectedCalendarEvent: CalendarEvent | null;
 }
 
-const tempEvent: CalendarEvent = {
-  id: Date.now().toString(),
-  title: "Cumpleaños del lider",
-  note: "Se realizará una celebración en grupo.",
-  startDateTimestamp: Date.now(),
-  endDateTimestamp: addHours(new Date(), 2).getTime(),
-  bgColor: "#ffffff",
-  user: { uid: "123", name: "Usuario" },
-};
+// const tempEvent: CalendarEvent = {
+//   id: Date.now().toString(),
+//   title: "Cumpleaños del lider",
+//   note: "Se realizará una celebración en grupo.",
+//   startDateTimestamp: Date.now(),
+//   endDateTimestamp: addHours(new Date(), 2).getTime(),
+//   bgColor: "#ffffff",
+//   user: { uid: "123", name: "Usuario" },
+// };
 
 const calendarSlice = createSlice({
   name: "calendar",
   initialState: {
-    calendarEvents: [tempEvent] as CalendarEvent[],
+    // La asignación de tipo ya no es necesaria.
+    // calendarEvents: [tempEvent] as CalendarEvent[],
+    calendarEvents: [],
+    isLoadingCalendarEvents: false,
     selectedCalendarEvent: null,
   } as CalendarSliceState,
   reducers: {
+    //* Calendar event loader handlers.
+    setGotCalendarEventsToState(
+      state,
+      { payload }: { payload: CalendarEvent[] },
+    ) {
+      state.isLoadingCalendarEvents = false;
+      state.calendarEvents = payload;
+    },
+
+    setIsLoadingCalendarEvents(state, { payload }: { payload: boolean }) {
+      state.isLoadingCalendarEvents = payload;
+    },
+
+    //* Clear state
+    resetState(state) {
+      state.calendarEvents = [];
+      state.isLoadingCalendarEvents = false;
+      state.selectedCalendarEvent = null;
+    },
+
+    //* CRUD
     insertNewEvent(state, { payload }: { payload: CalendarEvent }) {
       state.calendarEvents.push(payload);
     },
-
     selectCalendarEvent(state, { payload }: { payload: CalendarEvent }) {
       state.selectedCalendarEvent = payload;
     },
@@ -40,7 +64,6 @@ const calendarSlice = createSlice({
         note: "",
         startDateTimestamp: Date.now(),
         endDateTimestamp: addHours(new Date(), 2).getTime(),
-        bgColor: "#ffffff",
         user: { uid: "123", name: "Usuario" },
       };
     },
