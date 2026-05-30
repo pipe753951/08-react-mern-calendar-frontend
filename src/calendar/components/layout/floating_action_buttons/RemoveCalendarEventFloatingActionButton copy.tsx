@@ -4,13 +4,13 @@ import FloatingActionButton from "../../../../shared/components/FloatingActionBu
 import useCalendarStore from "../../../../store/hooks/useCalendarStore";
 
 const RemoveCalendarEventFloatingActionButton = function () {
-  const { startDeletingEvent } = useCalendarStore();
+  const { startDeletingSelectedCalendarEvent } = useCalendarStore();
 
   return (
     <FloatingActionButton
       variant="danger"
       size="sm"
-      onClick={startDeletingEvent}
+      onClick={startDeletingSelectedCalendarEvent}
     >
       <TrashIcon className="floating-action-button-sm-icon" />
       <span>Eliminar nota</span>
