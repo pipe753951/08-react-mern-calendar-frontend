@@ -4,8 +4,6 @@ import type { User } from "../../types/interfaces/User.interface";
 import type { DatabaseCalendarEvent } from "../../types/interfaces/DatabaseCalendarEvent.interface";
 import type { DatabaseCalendarEventWithUserInfo } from "../../types/interfaces/responses/GetCalendarEventsSuccessResponse.interface";
 
-const calendarEventBgColor = "#0062ff";
-
 const mapDbCalendarEventToCalendarEvent = (
   dbCalendarEvent: DatabaseCalendarEvent,
   userToAssign: User,
@@ -15,7 +13,6 @@ const mapDbCalendarEventToCalendarEvent = (
     title: dbCalendarEvent.title,
     note: dbCalendarEvent.note,
 
-    bgColor: structuredClone(calendarEventBgColor),
     startDateTimestamp: new Date(dbCalendarEvent.start).getTime(),
     endDateTimestamp: new Date(dbCalendarEvent.end).getTime(),
 
@@ -33,7 +30,6 @@ const mapGotDbCalendarEventsToCalendarEvents = function (
         title: dbCalendarEvent.title,
         note: dbCalendarEvent.note,
 
-        bgColor: structuredClone(calendarEventBgColor),
         endDateTimestamp: new Date(dbCalendarEvent.end).getTime(),
         startDateTimestamp: new Date(dbCalendarEvent.start).getTime(),
 

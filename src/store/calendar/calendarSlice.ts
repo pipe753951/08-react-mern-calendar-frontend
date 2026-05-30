@@ -57,7 +57,6 @@ const calendarSlice = createSlice({
         note: "",
         startDateTimestamp: Date.now(),
         endDateTimestamp: addHours(new Date(), 2).getTime(),
-        bgColor: "#ffffff",
         user: { uid: "123", name: "Usuario" },
       };
     },
