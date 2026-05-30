@@ -59,7 +59,6 @@ const useCalendarStore = function () {
     }
 
     try {
-      console.debug({ calendarEvent });
       const { data: responseData } =
         await calendarApi.put<UpdateCalendarEventSuccessResponse>(
           `/events/${calendarEvent.id}`,
@@ -70,8 +69,6 @@ const useCalendarStore = function () {
             note: calendarEvent.note,
           },
         );
-
-      console.debug({ responseData });
 
       const mappedCalendarEvent = mapDbCalendarEventToCalendarEvent(
         responseData.calendarEvent,
@@ -139,7 +136,6 @@ const useCalendarStore = function () {
     try {
       const { data: responseData } =
         await calendarApi.get<GetCalendarEventsSuccessResponse>("/events");
-      console.debug({ responseData });
 
       const mappedCalendarEvents = mapGotDbCalendarEventsToCalendarEvents(
         responseData.calendarEvents,

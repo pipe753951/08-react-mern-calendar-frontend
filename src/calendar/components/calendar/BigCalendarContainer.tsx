@@ -85,7 +85,6 @@ const BigCalendarContainer = function (props: BigCalendarContainerProps) {
   const eventStyleGetter: CalendarEventPropGetter<CustomBigCalendarEvent> = (
     event,
   ) => {
-    console.log(event);
     const style: CSSProperties = {
       backgroundColor:
         user!.uid === event.originalCalendarEvent.user.uid ? "#0081eb" : "gray",
