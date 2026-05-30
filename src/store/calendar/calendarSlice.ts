@@ -43,6 +43,13 @@ const calendarSlice = createSlice({
       state.isLoadingCalendarEvents = payload;
     },
 
+    //* Clear state
+    resetState(state) {
+      state.calendarEvents = [];
+      state.isLoadingCalendarEvents = false;
+      state.selectedCalendarEvent = null;
+    },
+
     //* CRUD
     insertNewEvent(state, { payload }: { payload: CalendarEvent }) {
       state.calendarEvents.push(payload);

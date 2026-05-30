@@ -9,7 +9,9 @@ import type { LoginSuccessResponse } from "../../types/interfaces/responses/Logi
 import type { RenewJwtTokenSuccessResponse } from "../../types/interfaces/responses/RenewJwtTokenSuccessResponse.interface";
 
 import calendarApi from "../../shared/api/calendarApi";
+
 import authSlice from "../auth/authSlice";
+import calendarSlice from "../calendar/calendarSlice";
 
 interface SetAuthUserParameters {
   user: User;
@@ -102,6 +104,7 @@ const useAuthStore = function () {
   };
 
   const startLogout = async () => {
+    dispatch(calendarSlice.actions.resetState());
     _expireAuth();
   };
 
