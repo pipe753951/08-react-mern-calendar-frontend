@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import useForm from "../../../shared/hooks/useForm";
 import useAuthStore from "../../../store/hooks/useAuthStore";
 
-import showAuthErrorOnUi from "../../utilities/showAuthErrorOnUi";
+import showAuthErrorOnUi from "../../helpers/showAuthErrorOnUi";
 
 const LoginPage = function () {
   const { startLogin } = useAuthStore();
