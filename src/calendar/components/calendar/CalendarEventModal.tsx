@@ -6,6 +6,8 @@ import type { CalendarModalFormValues } from "../../../types/interfaces/forms/Ca
 import useCalendarStore from "../../../store/hooks/useCalendarStore";
 import useUiStore from "../../../store/hooks/useUiStore";
 
+import showCalendarErrorOnUi from "../../helpers/showCalendarErrorOnUi";
+
 import AppModal from "../../../shared/components/AppModal";
 import CalendarEventModalForm from "./CalendarEventModalForm";
 
@@ -41,7 +43,7 @@ const CalendarEventModal = function () {
       endDateTimestamp: formValues.end.getTime(),
     };
 
-    await startUploadingOfCalendarEvent(modifiedEvent);
+    await startUploadingOfCalendarEvent(modifiedEvent, showCalendarErrorOnUi);
     closeDateModal();
   };
 

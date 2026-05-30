@@ -2,6 +2,7 @@ import type { CalendarEvent } from "../../types/interfaces/CalendarEvent.interfa
 
 import type { CreateCalendarEventSuccessResponse } from "../../types/interfaces/responses/CreateCalendarEventSuccessResponse.interface";
 import type { GetCalendarEventsSuccessResponse } from "../../types/interfaces/responses/GetCalendarEventsSuccessResponse.interface";
+import type { UpdateCalendarEventSuccessResponse } from "../../types/interfaces/responses/UpdateCalendarEventSuccessResponse.interface";
 
 import useStoreDispatch from "./useStoreDispatch";
 import useStoreSelector from "./useStoreSelector";
@@ -42,6 +43,50 @@ const useCalendarStore = function () {
     dispatch(calendarSlice.actions.insertNewEvent(mappedCalendarEvent));
   };
 
+  const _startUploadingOfEditedCalendarEvent = async (
+    calendarEvent: CalendarEvent,
+    errorCallback?: (errorMessage: string, errorDescription?: string) => void,
+  ) => {
+    if (calendarEvent.user.uid !== user!.uid) {
+      errorCallback?.(
+        `No estás autorizada/o para modificar el evento "${calendarEvent.title}".`,
+      );
+
+      if (import.meta.env.PROD) return;
+      throw new Error(
+        `User aren't authorized to modify event "${calendarEvent.title}"`,
+      );
+    }
+
+    try {
+      console.debug({ calendarEvent });
+      const { data: responseData } =
+        await calendarApi.put<UpdateCalendarEventSuccessResponse>(
+          `/events/${calendarEvent.id}`,
+          {
+            start: calendarEvent.startDateTimestamp,
+            end: calendarEvent.endDateTimestamp,
+            title: calendarEvent.title,
+            note: calendarEvent.note,
+          },
+        );
+
+      console.debug({ responseData });
+
+      const mappedCalendarEvent = mapDbCalendarEventToCalendarEvent(
+        responseData.calendarEvent,
+        user!,
+      );
+
+      dispatch(calendarSlice.actions.updateEvent(mappedCalendarEvent));
+    } catch (error) {
+      throw new Error(
+        "Something unexpected while uploading an edited event to backend.",
+        { cause: error },
+      );
+    }
+  };
+
   const selectCalendarEvent = (calendarEvent: CalendarEvent) => {
     dispatch(calendarSlice.actions.selectCalendarEvent(calendarEvent));
   };
@@ -60,16 +105,14 @@ const useCalendarStore = function () {
 
   const startUploadingOfCalendarEvent = async (
     calendarEvent: CalendarEvent,
+    errorCallback?: (errorMessage: string, errorDescription?: string) => void,
   ) => {
-    // TODO: Llegar al backend.
-
-    //* Suponiendo que todo salió bien.
     const isCreatingCalendarEvent = calendarEvent.id === "new";
 
     if (isCreatingCalendarEvent) {
       _startUploadingOfNewCalendarEvent(calendarEvent);
     } else {
-      dispatch(calendarSlice.actions.updateEvent(calendarEvent));
+      _startUploadingOfEditedCalendarEvent(calendarEvent, errorCallback);
     }
   };
 
