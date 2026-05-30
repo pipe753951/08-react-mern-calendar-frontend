@@ -83,7 +83,9 @@ const useCalendarStore = function () {
         responseData.calendarEvents,
       );
 
-      console.debug({ mappedCalendarEvents });
+      dispatch(
+        calendarSlice.actions.setGotCalendarEventsToState(mappedCalendarEvents),
+      );
     } catch (error) {
       if (import.meta.env.PROD) return;
 
