@@ -10,6 +10,8 @@ import {
 import type { CustomBigCalendarEvent } from "../../../types/interfaces/CustomBigCalendarEvent.interface";
 import type { CalendarEvent } from "../../../types/interfaces/CalendarEvent.interface";
 
+import useAuthStore from "../../../store/hooks/useAuthStore";
+
 import { calendarLocalizer } from "../../helpers/calendarLocalizer.helper";
 import { mapCustomBigCalendarEvents } from "../../mappers/customBigCalendarEvent.mapper";
 import getCalendarMessagesLocale from "../../../locale/getCalendarMessagesLocale";
@@ -49,6 +51,8 @@ const BigCalendarContainer = function (props: BigCalendarContainerProps) {
     onSelectCalendarEvent,
   } = props;
 
+  const { user } = useAuthStore();
+
   const mappedCustomBigCalendarEvents =
     mapCustomBigCalendarEvents(calendarEvents);
 
@@ -78,11 +82,13 @@ const BigCalendarContainer = function (props: BigCalendarContainerProps) {
   //   isSelected,
   // ) => {/* ... */}
 
-  const eventStyleGetter: CalendarEventPropGetter<
-    CustomBigCalendarEvent
-  > = () => {
+  const eventStyleGetter: CalendarEventPropGetter<CustomBigCalendarEvent> = (
+    event,
+  ) => {
+    console.log(event);
     const style: CSSProperties = {
-      backgroundColor: "#347CF7",
+      backgroundColor:
+        user!.uid === event.originalCalendarEvent.user.uid ? "#0081eb" : "gray",
       color: "white",
       borderRadius: "none",
       opacity: 0.8,
