@@ -45,7 +45,7 @@ const useCalendarStore = function () {
 
   const _startUploadingOfEditedCalendarEvent = async (
     calendarEvent: CalendarEvent,
-    errorCallback?: (errorMessage: string, errorDescription?: string) => void,
+    errorCallback?: (errorMessage: string) => void,
   ) => {
     if (calendarEvent.user.uid !== user!.uid) {
       errorCallback?.(
@@ -81,7 +81,7 @@ const useCalendarStore = function () {
       dispatch(calendarSlice.actions.updateEvent(mappedCalendarEvent));
     } catch (error) {
       throw new Error(
-        "Something unexpected while uploading an edited event to backend.",
+        "Something unexpected was occurred while uploading an edited event to backend.",
         { cause: error },
       );
     }
@@ -95,12 +95,31 @@ const useCalendarStore = function () {
     dispatch(calendarSlice.actions.selectNewCalendarEvent());
   };
 
-  const startDeletingSelectedCalendarEvent = async () => {
-    // TODO: Llegar al backend.
+  const startDeletingSelectedCalendarEvent = async (
+    errorCallback?: (errorMessage: string) => void,
+  ) => {
+    if (!selectedCalendarEvent) return;
 
-    //* Suponiendo que todo salió bien.
+    if (selectedCalendarEvent.user.uid !== user!.uid) {
+      errorCallback?.(
+        `No estás autorizada/o para eliminar el evento "${selectedCalendarEvent.title}".`,
+      );
 
-    dispatch(calendarSlice.actions.deleteEvent());
+      if (import.meta.env.PROD) return;
+      throw new Error(
+        `User aren't authorized to delete event "${selectedCalendarEvent.title}"`,
+      );
+    }
+
+    try {
+      await calendarApi.delete(`/events/${selectedCalendarEvent.id}`);
+      dispatch(calendarSlice.actions.deleteEvent());
+    } catch (error) {
+      throw new Error(
+        "Something unexpected was occurred while uploading an edited event to backend.",
+        { cause: error },
+      );
+    }
   };
 
   const startUploadingOfCalendarEvent = async (
